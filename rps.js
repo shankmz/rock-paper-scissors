@@ -12,11 +12,35 @@
 //If the number of rounds is greater than 5 then set the gameOn flag to false and end the game.
 //Choose and display the final winner based on the total score.
 
-function getComputerChoice(compChoice) {
+let playerSelection = prompt("Enter Rock, Paper, or Scissors.");
+
+function playGame(computerSelection, playerSelection) {
+
+if (playerSelection === computerSelection) {
+    return("It/'s a tie.")
+}
+else if (playerSelection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "paper") {
+    console.log("You Lose.")
+}
+
+else if (playerSelection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "scissors") {
+    console.log("You Win!.")
+}
+
+else if (playerSelection.toLowerCase() === "scissors" && computerSelection.toLowerCase() === "rock") {
+    console.log("You Lose.")
+}
+
+else if (playerSelection.toLowerCase() === "scissors" && computerSelection.toLowerCase() === "paper") {
+    console.log("You Win!.")
+}
+}
+function computerSelection(compChoice) {
     return compChoice [Math.floor(Math.random()*compChoice.length)];
     
 }
 const compChoice = ["Rock", "Paper", "Scissors"];
-console.log (getComputerChoice(compChoice));
+
+
 
 
