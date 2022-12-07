@@ -13,62 +13,74 @@
 //Choose and display the final winner based on the total score.
 
 
-let playerSelection = prompt("Choose Rock, Paper, or Scissors").toLowerCase();
-
-function getComputerChoice(compChoice) {
-    return compChoice [Math.floor(Math.random()*compChoice.length)];
-    
-}
 const compChoice = ["rock", "paper", "scissors"];
+let computerScore = 0;
+let playerScore = 0;
 
-const computerSelection = getComputerChoice(compChoice);
+function game() {
+    for (let i = 0; i <= 4; i++) {
+    playRound();
+    
+    
+}   const gameWinner = winnerGame(playerScore, computerScore);
+    console.log(gameWinner);
 
-let playerScore = 0
-let computerScore = 0 
+}
+function playRound(){
+    const playerSelection = playerChoice();
+    const computerSelection = getComputerChoice();
+    const winner = checkWinner(playerSelection, computerSelection);
+    console.log(winner);
+}
 
-function game(playRound) {
-    for (let i = 0; i <= 5; i++) {
-   // playRound(computerSelection, playerSelection);
-   // } if (playerScore > computerScore) {
-    //    return "Player Wins!";
-    //} else if (playerScore === computerScore) {
-    //    return "Tie Game";
-    //} else {
-    //    return "Computer Wins"; 
+function getComputerChoice() {
+    return compChoice [Math.floor(Math.random() * compChoice.length)];
+}
+
+function playerChoice() {
+    let playerInput = prompt("Choose Rock, Paper, or Scissors").toLowerCase();
+    return playerInput;
+}
+
+function checkWinner(choiceP, choiceC) {
+
+    if (choiceP === choiceC) {
+        return "It's a tie";
+   }
+   else if (choiceP === "rock" && choiceC === "paper") {
+       return "You Lose " + ++computerScore;
+   }
+   
+   else if (choiceP === "rock" && choiceC === "scissors") {
+       return "You Win! " + ++playerScore;
+   }
+   
+   else if (choiceP === "scissors" && choiceC === "rock") {
+       return "You Lose " + ++computerScore;
+   }
+   
+   else if (choiceP === "scissors" && choiceC === "paper") {
+       return "You Win! " + ++playerScore;
+   }
+   
+   else if (choiceP === "paper" && choiceC === "scissors") {
+       return "You Lose! " + ++computerScore;
+   }
+   
+   else (choiceP === "paper" && choiceC === "rock"); {
+       return "You Win! " + ++playerScore;
+   }
+}
+
+function winnerGame (winnerP, winnerC) {
+    if (winnerP === winnerC) {
+        return "Tie Game";
+    } else if (winnerP > winnerC) {
+        return "Game is Yours!";
+    } else {
+        return "Computers Game";
     }
 }
 
-function playRound(computerSelection, playerSelection) {
-
-if (playerSelection === computerSelection) {
-     return "It's a tie";
-}
-else if (playerSelection === "rock" && computerSelection === "paper") {
-    return "You Lose " + ++computerScore;
-}
-
-else if (playerSelection === "rock" && computerSelection === "scissors") {
-    return "You Win! " + ++playerScore;
-}
-
-else if (playerSelection === "scissors" && computerSelection === "rock") {
-    return "You Lose " + ++computerScore;
-}
-
-else if (playerSelection === "scissors" && computerSelection === "paper") {
-    return "You Win! " + ++playerScore;
-}
-
-else if (playerSelection === "paper" && computerSelection === "scissors") {
-    return "You Lose! " + ++computerScore;
-}
-
-else (playerSelection === "paper" && computerSelection === "rock"); {
-    return "You Win! " + ++playerScore;
-}
-
-}
-
-console.log(game(playRound));
-
+game();
 
