@@ -5,18 +5,39 @@ const playerScoreBoard = document.querySelector('[data-player-score');
 const computerScoreBoard = document.querySelector('[data-computer-score');
 const tieScoreBoard = document.querySelector('[data-ties-score');
 
+let computerScore = document.querySelector("computer-score");
+let ties = document.querySelector("ties");
+let playerScore = document.querySelector("player-score");
 
 selectionButtons.forEach(selectionButtons => {
     selectionButtons.addEventListener('click', e => {
-        const selectionName = selectionButtons.dataset.selection
-        makeSelection(selectionName)
+        let selectionName = selectionButtons.dataset.selection
+        //playRound(selectionName)
+        
     })
 })
 
-function makeSelection(selection) {
+function playRound(selection) {
     const computerSelection = getComputerChoice();
-    const winner = checkWinner(selection, computerSelection)
-    console.log(winner)
+    checkWinner(selection, computerSelection);
+
+}
+
+function game() {
+    for (let i = 0; i <= 4; i++){
+        
+    }
+    winnerGame(playerScore, computerScore);
+}
+
+function winnerGame (winnerP, winnerC) {
+    if (winnerP === winnerC) {
+        return alert ("Tie Game");
+    } else if (winnerP > winnerC) {
+        return alert ("You have defeated the machines!");
+    } else {
+        return alert ("Skynet has won");
+    }
 }
 
 function getComputerChoice() {
@@ -26,11 +47,6 @@ function getComputerChoice() {
 function incrementScore(scoreBoard){
     scoreBoard.innerText = parseInt(scoreBoard.innerText) + 1
 }
-
-let computerScore = document.querySelector("computer-score");
-let ties = document.querySelector("ties");
-let playerScore = document.querySelector("player-score");
-
 
 function checkWinner(choiceP, choiceC) {
 
@@ -61,4 +77,5 @@ function checkWinner(choiceP, choiceC) {
        return incrementScore(playerScoreBoard) + ++playerScore;
    }
 }
+
 
