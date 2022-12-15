@@ -4,15 +4,17 @@ const selectionButtons = document.querySelectorAll("[data-selection]");
 const playerScoreBoard = document.querySelector('[data-player-score');
 const computerScoreBoard = document.querySelector('[data-computer-score');
 const tieScoreBoard = document.querySelector('[data-ties-score');
+const gameOver = document.querySelector('.game-over');
 
 let computerScore = document.querySelector("computer-score");
 let ties = document.querySelector("ties");
 let playerScore = document.querySelector("player-score");
+let roundCount = 0;
 
 selectionButtons.forEach(selectionButtons => {
     selectionButtons.addEventListener('click', e => {
         let selectionName = selectionButtons.dataset.selection
-        //playRound(selectionName)
+        playRound(selectionName)
         
     })
 })
@@ -20,23 +22,25 @@ selectionButtons.forEach(selectionButtons => {
 function playRound(selection) {
     const computerSelection = getComputerChoice();
     checkWinner(selection, computerSelection);
-
-}
-
-function game() {
-    for (let i = 0; i <= 4; i++){
-        
+    if (roundCount >= 5) {
+        return winnerGame(playerScore, computerScore);
     }
-    winnerGame(playerScore, computerScore);
 }
+
+/*function game() {
+    for (let i = 0; i <= 4; i++){
+        playRound();
+    }
+    //winnerGame(playerScore, computerScore); 
+}*/
 
 function winnerGame (winnerP, winnerC) {
     if (winnerP === winnerC) {
-        return alert ("Tie Game");
+        return gameOver.textContent = 'Tie Game';
     } else if (winnerP > winnerC) {
-        return alert ("You have defeated the machines!");
+        return gameOver.textContent = "You have defeated the machines!";
     } else {
-        return alert ("Skynet has won");
+        return gameOver.textContent = "Skynet has won";
     }
 }
 
@@ -51,30 +55,30 @@ function incrementScore(scoreBoard){
 function checkWinner(choiceP, choiceC) {
 
     if (choiceP === choiceC) {
-        return incrementScore(tieScoreBoard) + ++ties;
+        return incrementScore(tieScoreBoard) + ++ties + ++roundCount;
    }
    else if (choiceP === "rock" && choiceC === "paper") {
-       return incrementScore(computerScoreBoard) + ++computerScore;
+       return incrementScore(computerScoreBoard) + ++computerScore + ++roundCount;
    }
    
    else if (choiceP === "rock" && choiceC === "scissors") {
-       return incrementScore(playerScoreBoard) + ++playerScore;
+       return incrementScore(playerScoreBoard) + ++playerScore + ++roundCount;
    }
    
    else if (choiceP === "scissors" && choiceC === "rock") {
-       return incrementScore(computerScoreBoard) + ++computerScore;
+       return incrementScore(computerScoreBoard) + ++computerScore + ++roundCount;
    }
    
    else if (choiceP === "scissors" && choiceC === "paper") {
-       return ++playerScore;
+       return incrementScore(playerScoreBoard) + ++playerScore + ++roundCount;
    }
    
    else if (choiceP === "paper" && choiceC === "scissors") {
-       return incrementScore(computerScoreBoard) + ++computerScore;
+       return incrementScore(computerScoreBoard) + ++computerScore + ++roundCount;
    }
    
    else (choiceP === "paper" && choiceC === "rock"); {
-       return incrementScore(playerScoreBoard) + ++playerScore;
+       return incrementScore(playerScoreBoard) + ++playerScore + ++roundCount;
    }
 }
 
